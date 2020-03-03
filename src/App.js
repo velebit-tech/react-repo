@@ -1,15 +1,24 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
-import Person from './Animal/Animal.js'
+import Animal from './Animal/Animal.js'
 
-function App() {
-  return (
+class App extends Component {
+  state = {
+    animals: [
+      {type: 'giraffe', skin: 'orange'},
+      {type: 'cat', skin: 'white'}
+    ]
+  }
+
+  render() {
+    return (
     <div className="App">
       <h2>Hello react.</h2>
-      <Person />
-      <Person />
+      <Animal type={this.state.animals[0].type} skin={this.state.animals[0].skin} />
+      <Animal type={this.state.animals[1].type} skin={this.state.animals[1].skin}>Meow.</Animal>
     </div>
-  );
+    );
+  }
 }
 
 export default App;
