@@ -5,8 +5,7 @@ import './Animal.css';
 const animal = (props) => {
   return (
     <div className="Animal">
-      <p>I am a {props.type} and I have {props.skin} skin.</p>
-      <p onClick={props.click}>{props.children}</p>
+      <p onClick={props.clicked}>I am a {props.type} and I have {props.skin} skin.</p>
       <input type="text" onChange={props.skinchange} value={props.skin} />
     </div>
   )

@@ -5,45 +5,61 @@ import Animal from './Animal/Animal.js'
 class App extends Component {
   state = {
     animals: [
-      {type: 'giraffe', skin: 'orange'},
-      {type: 'cat', skin: 'white'}
+      {id: 'asdfgasdg', type: 'giraffe', skin: 'orange'},
+      {id: 'asdgsasdgasdf', type: 'cat', skin: 'white'}
     ],
-    otherState: 'someValue'
+    otherState: 'someValue',
+    visible: true
   }
 
-  changeAnimalHandler = (type) => {
-    this.setState( {
-      animals: [
-        {type: type, skin: 'orange'},
-        {type: 'dog', skin: 'brown'}
-      ]
-    } )
+  changeSkinHandler = (event, id) => {
+    const animalIndex = this.state.animals.findIndex(a => {
+      return a.id === id;
+    });
+
+    const animal = {...this.state.animals[animalIndex]};
+    animal.skin = event.target.value;
+
+    const animals = [...this.state.animals];
+    animals[animalIndex] = animal;
+
+    this.setState({animals: animals});
   }
 
-  changeSkinHandler = (event) => {
-    this.setState( {
-      animals: [
-        {type: 'giraffe', skin: event.target.value},
-        {type: 'dog', skin: 'brown'}
-      ]
-    } )
+  toggleAnimalsHandler = () => {
+    const visibleAnimals = this.state.visible;
+    this.setState({visible: !visibleAnimals});
+  }
+
+  deleteAnimalHandler = (animalIndex) => {
+    const animals = [...this.state.animals];
+    animals.splice(animalIndex, 1);
+    this.setState({animals: animals});
   }
 
   render() {
+    let animals = null;
+
+    if (this.state.visible) {
+      animals = (
+        <div>
+          {this.state.animals.map((animal, index) => {
+            return <Animal
+              key={animal.id} 
+              type={animal.type} 
+              skin={animal.skin}
+              clicked={() => {this.deleteAnimalHandler(index)}}
+              skinchange={(event) => this.changeSkinHandler(event, animal.id)} />
+          })}
+        </div>
+      );
+    }
+
     return (
     <div className="App">
       <h2>Hello react.</h2>
-      <button onClick={this.changeAnimalHandler.bind(this, 'pas')}>Change Animal</button>
-      <Animal 
-        type={this.state.animals[0].type} 
-        skin={this.state.animals[0].skin}
-        skinchange={this.changeSkinHandler} />
-      <Animal 
-        type={this.state.animals[1].type} 
-        skin={this.state.animals[1].skin}
-        click={this.changeAnimalHandler.bind(this, 'macka')} >
-        Meow.
-      </Animal>
+      <button onClick={this.toggleAnimalsHandler}>Show/Hide animals</button>
+      {animals}
     </div>
     );
   }
