@@ -9,7 +9,7 @@ class App extends Component {
       {id: 'asdfgasdg', type: 'giraffe', skin: 'orange'},
       {id: 'asdgsasdgasdf', type: 'cat', skin: 'white'}
     ],
-    otherState: 'someValue',
+    otherState: 'some value',
     visible: true
   }
 
