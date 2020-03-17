@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Animal from './Animal/Animal.js'
+
 
 class App extends Component {
   state = {
