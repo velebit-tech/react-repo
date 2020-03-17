@@ -55,10 +55,24 @@ class App extends Component {
       );
     }
 
+    const btnStyles = {
+      display: 'block',
+      width: '30%',
+      margin: '10px auto',
+      border: '1px solid black',
+      padding: '10px',
+      backgroundColor: 'DodgerBlue',
+      color: 'white',
+      font: '14px Verdana',
+      ':hover': {
+        backgroundColor: 'DeepSkyBlue'
+      }
+    }
+
     return (
     <div className="App">
       <h2>Hello react.</h2>
-      <button onClick={this.toggleAnimalsHandler}>Show/Hide animals</button>
+      <button onClick={this.toggleAnimalsHandler} style={btnStyles}>Show/Hide animals</button>
       {animals}
     </div>
     );
